@@ -56,8 +56,9 @@ def _grid_plot(df, columns, n_cols, title_prefix, is_numeric=True):
 
 class PipelineVisualizer(BaseEstimator, TransformerMixin):
     """A custom pipeline step that draws plots and then passes data forward."""
-    def __init__(self, title="Pipeline Step"):
+    def __init__(self, title="Pipeline Step", feature_names=None):
         self.title = title  # Set the title for the visualization step
+        self.feature_names = feature_names  # Store the feature names
 
     def fit(self, X, y=None):
         return self  # Fit method does nothing, just returns self
