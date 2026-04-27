@@ -1,3 +1,14 @@
-data/
-.vscode/
+# --- Python Junk ---
 __pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# --- Environment & IDE ---
+.vscode/
+.env
+venv/
+ENV/
+
+# --- Data (Comment out the line below if you WANT to upload your data) ---
+# data/
