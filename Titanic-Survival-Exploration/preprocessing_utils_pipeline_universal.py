@@ -10,6 +10,54 @@ from sklearn.impute import SimpleImputer  # Import SimpleImputer for handling mi
 from sklearn.preprocessing import StandardScaler, OneHotEncoder  # Import StandardScaler for scaling and OneHotEncoder for encoding
 from sklearn.compose import ColumnTransformer  # Import ColumnTransformer for applying different preprocessing to different columns
 
+def add_titanic_features(df):
+    """
+    Creates new features to help the model understand social status 
+    and family dynamics on the Titanic.
+    """
+    df_copy = df.copy()
+    
+    # 1. Handle Cabin 'U' (Unknown)
+    # We do this BEFORE encoding so 'U' becomes its own category
+    if 'Cabin' in df_copy.columns:
+        df_copy['Cabin'] = df_copy['Cabin'].fillna('U')
+        # Extract the first letter to create the 'Deck' feature
+        # e.g., 'C22' becomes 'C', 'U' stays 'U'
+        # We simplify 'Cabin' into 'Deck' (first letter) to reduce noise and overfitting risk.
+        df_copy['Deck'] = df_copy['Cabin'].astype(str).str[0]
+        # One last check: Since your get_preprocessing_pipeline handles categorical data, 
+        # it will see Deck and automatically apply One-Hot Encoding to it.
+        
+        # We drop the high-cardinality 'Cabin' column to prevent overfitting
+        df_copy = df_copy.drop(['Cabin'], axis=1)
+        
+    # 2. FamilySize: Total people in the family (including the passenger)
+    if 'SibSp' in df_copy.columns and 'Parch' in df_copy.columns:
+        df_copy['FamilySize'] = df_copy['SibSp'] + df_copy['Parch'] + 1
+        
+        # 3. IsAlone: A binary flag (1 if alone, 0 if with family)
+        # Often, solo travelers had lower survival rates in 3rd class.
+        df_copy['IsAlone'] = 0
+        df_copy.loc[df_copy['FamilySize'] == 1, 'IsAlone'] = 1
+    
+    # 4. Title Extraction: Extract 'Mr', 'Mrs', 'Miss', etc., from the Name column
+    # Titles are a proxy for both age and social standing.
+    if 'Name' in df_copy.columns:
+        # Extracts the string that ends with a period (e.g., "Braund, Mr. Owen")
+        df_copy['Title'] = df_copy['Name'].str.extract(' ([A-Za-z]+)\.', expand=False)
+        
+        # Group rare titles to prevent the model from over-fitting to unique cases
+        rare_titles = ['Lady', 'Countess','Capt', 'Col', 'Don', 'Dr', 
+                    'Major', 'Rev', 'Sir', 'Jonkheer', 'Dona']
+        df_copy['Title'] = df_copy['Title'].replace(rare_titles, 'Rare')
+        df_copy['Title'] = df_copy['Title'].replace('Mlle', 'Miss')
+        df_copy['Title'] = df_copy['Title'].replace('Ms', 'Miss')
+        df_copy['Title'] = df_copy['Title'].replace('Mme', 'Mrs')
+
+    return df_copy
+
+# Use it like this:
+X_train_engineered = add_titanic_features(X_train)
 def get_preprocessing_pipeline(df, model):
     """
     Create a universal preprocessing pipeline for a given DataFrame and model.
