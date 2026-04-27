@@ -56,8 +56,6 @@ def add_titanic_features(df):
 
     return df_copy
 
-# Use it like this:
-X_train_engineered = add_titanic_features(X_train)
 def get_preprocessing_pipeline(df, model):
     """
     Create a universal preprocessing pipeline for a given DataFrame and model.
