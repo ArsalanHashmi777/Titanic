@@ -56,6 +56,37 @@ def add_titanic_features(df):
 
     return df_copy
 
+def get_house_features(df):
+    """
+    Specific feature engineering for the House Prices dataset.
+    Handles ordinal mapping and feature combinations.
+    """
+    df_copy = df.copy()
+    
+    # 1. Map Ordinal Categories (Quality/Condition)
+    # Most quality features use this scale
+    qual_map = {'Ex': 5, 'Gd': 4, 'TA': 3, 'Fa': 2, 'Po': 1, 'None': 0}
+    
+    qual_cols = ['ExterQual', 'ExterCond', 'BsmtQual', 'BsmtCond', 
+                'HeatingQC', 'KitchenQual', 'FireplaceQu', 'GarageQual', 'GarageCond']
+    
+    for col in qual_cols:
+        if col in df_copy.columns:
+            df_copy[col] = df_copy[col].map(qual_map).fillna(0)
+
+    # 2. Total Square Footage (Feature Combination)
+    # A house's total size is often more important than individual floors
+    df_copy['TotalSF'] = df_copy['TotalBsmtSF'] + df_copy['1stFlrSF'] + df_copy['2ndFlrSF']
+    
+    # 3. Total Bathrooms
+    df_copy['TotalBath'] = (df_copy['FullBath'] + (0.5 * df_copy['HalfBath']) + 
+                            df_copy['BsmtFullBath'] + (0.5 * df_copy['BsmtHalfBath']))
+
+    # 4. House Age (Transforming YearBuilt into something more useful)
+    df_copy['HouseAge'] = df_copy['YrSold'] - df_copy['YearBuilt']
+
+    return df_copy
+
 def get_preprocessing_pipeline(df, model):
     """
     Create a universal preprocessing pipeline for a given DataFrame and model.
