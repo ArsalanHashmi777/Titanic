@@ -13,8 +13,8 @@ Welcome to my central repository for Machine Learning. This collection showcases
 **Models:** Random Forest (Final), XGBoost, Logistic Regression.
 
 **Results:** 
-Achieved ~84% training CV with a focus on generalization.
-Achieved ~78% on test accuracy, as the final accuracy on kaggle.
+- Achieved ~84% training CV with a focus on generalization.
+- Achieved ~78% on test accuracy, as the final accuracy on kaggle.
 
 ### **🛠️ Tech Stack**
 
