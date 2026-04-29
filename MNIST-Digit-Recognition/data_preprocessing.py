@@ -23,33 +23,32 @@ def train_and_evaluate_xgb(X_train, y_train, X_test, y_test, use_gpu=False):
     """
     Encodes labels, trains an XGBoost model, and returns the model and predictions.
     """
-    # 1. Encode labels (MNIST fetch_openml targets are often strings)
+    # 1. Encode labels
     le = LabelEncoder()
     y_train_enc = le.fit_transform(y_train)
     y_test_enc = le.transform(y_test)
 
     # 2. Initialize Model
-    # 'gpu_hist' is for Kaggle/NVIDIA GPUs, 'hist' is for CPU
-    method = 'gpu_hist' if use_gpu else 'hist'
+    # NEW LOGIC: Use 'hist' for both, but change 'device' for GPU
+    dev = "cuda" if use_gpu else "cpu"
     
-    print(f"Initializing XGBoost with tree_method='{method}'...")
+    print(f"Initializing XGBoost using device: {dev}...")
     xgb_model = XGBClassifier(
         n_estimators=100,
         max_depth=6,
         learning_rate=0.1,
-        tree_method=method,
+        tree_method='hist',  # 'hist' is now the universal high-performance method
+        device=dev,          # This tells XGBoost to use the GPU (cuda)
         random_state=42,
-        n_jobs=-1 # Use all available CPU cores
+        n_jobs=-1
     )
 
     # 3. Train
-    print("Training XGBoost (this may take a few minutes on CPU)...")
+    print(f"Training XGBoost on {dev.upper()}...")
     xgb_model.fit(X_train, y_train_enc)
     
     # 4. Predict
     predictions = xgb_model.predict(X_test)
-    
-    # Inverse transform back to original labels (strings like '0', '1'...)
     decoded_preds = le.inverse_transform(predictions)
     
     return xgb_model, decoded_preds
