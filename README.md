@@ -1,42 +1,34 @@
-## **Machine Learning Projects Portfolio**
+# Machine Learning & Data Science Portfolio
+Welcome to my professional repository. This space documents my journey from foundational classification to advanced computer vision and regression.
 
-Welcome to my central repository for Machine Learning. This collection showcases my journey through data science, focusing on clean code, rigorous validation, and advanced feature engineering.
+## 📂 Featured Projects
 
-### **🚀 Projects**
+### 🔢 [MNIST Digit Recognition (Computer Vision Baseline)](link-to-mnist-folder)
+* **Goal:** Classify handwritten digits using pixel-level analysis.
+* **Tech:** Random Forest, **XGBoost (GPU)**, Modular Python Scripts.
+* **Key Achievement:** Achieved **97% Accuracy** using cloud GPU acceleration; visualized pixel importance "hotspots" to identify model bottlenecks.
 
-🏠 [House Prices: Advanced Regression Techniques](https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques)  
-**Goal:** Predict residential real estate prices using 79 explanatory variables.
+### 🏠 [House Price Prediction (Advanced Regression)](https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques)
+* **Goal:** Predict real estate prices using 79 explanatory variables.
+* **Tech:** XGBoost (Champion), Log-Transformation, Advanced Imputation.
+* **Key Achievement:** **Top 30% Global Rank** (0.12870 score). Successfully captured complex valuation signals like `TotalSF` and Neighborhood-based trends.
 
-**Key Techniques:** Log-Transformation, Advanced Imputation (Neighborhood-based), Ordinal Mapping, Feature Construction (`TotalSF`, `TotalBath`).
-
-**Models:** **XGBoost (Champion)**, Random Forest.
-
-**Results:** - **Top 30%** on the Global Leaderboard (Rank 1,523 / 4,939).
-- **0.12870 Score**, demonstrating a highly robust pipeline that successfully captured complex real estate valuation signals.
-
----
-
-🚢 [Titanic: Machine Learning from Disaster](https://www.kaggle.com/competitions/titanic)  
-**Goal:** Predict passenger survival using demographic and location data.
-
-**Key Techniques:** Pipeline Architecture, Custom Feature Engineering (Deck/Title extraction), GridSearchCV, Cross-Validation.
-
-**Models:** **Random Forest (Final)**, XGBoost, Logistic Regression.
-
-**Results:** - **Top 38%** on the Global Leaderboard (Rank 4,947 / 12,896).
-- **0.77751 Score**, achieving a high rank in one of Kaggle's most competitive entry-level challenges by prioritizing generalization over noise.
+### 🚢 [Titanic: Survival Prediction (Classification)](https://www.kaggle.com/competitions/titanic)
+* **Goal:** Predict passenger survival using demographic data.
+* **Tech:** Pipeline Architecture, Custom Feature Engineering (Deck/Title extraction), GridSearchCV.
+* **Key Achievement:** **Top 38% Global Rank**. Developed a robust pipeline prioritizing generalization and cross-validation over noise.
 
 ---
 
-### **🛠️ Tech Stack**
+## 🛠️ Tech Stack & Skills
+* **Languages:** Python, SQL, Lua.
+* **Specialties:** Feature Engineering, Model Optimization (GridSearchCV), Modular Script Design.
+* **Tools:** Git/GitHub, Kaggle Kernels (GPU), Jupyter.
 
-**Languages:** Python, **SQL**
+---
+### 📫 Connect with me
+**LinkedIn:** [Arsalan Hashmi](https://www.linkedin.com/in/arsalan-hashmi-044087406/) | **Kaggle:** [Arsalan Hashmi](https://www.kaggle.com/arsalanhashmi7)
 
-**Libraries:** Scikit-Learn, XGBoost, Pandas, NumPy, Matplotlib, Seaborn
+*Next milestone: Implementing Convolutional Neural Networks (CNNs) to push MNIST accuracy past 99%.*
 
-**Tools:** Jupyter Notebooks, Git/GitHub, Kaggle Kernels
-
-### **📫 Connect with me**
-
-**LinkedIn:** [Arsalan Hashmi](https://www.linkedin.com/in/arsalan-hashmi-044087406/)  
-**Kaggle:** [Arsalan Hashmi](https://www.kaggle.com/arsalanhashmi7)
+---
