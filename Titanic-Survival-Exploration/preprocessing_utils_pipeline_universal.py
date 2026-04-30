@@ -96,7 +96,7 @@ def get_preprocessing_pipeline(df, model):
 
     return Pipeline(steps=[('preprocessor', preprocessor), ('model', model)])  # Return a pipeline with preprocessor and model
 
-"""3. The "Feature Engineering" Catch
+"""The "Feature Engineering" Catch
 There is one thing a universal pipeline cannot do: create features like FamilySize or Title.
 
 These are "domain-specific."
@@ -104,12 +104,8 @@ These are "domain-specific."
 FamilySize makes sense for the Titanic, but it makes zero sense for a dataset about Weather or Stock Prices.
 
 The Solution:
-Keep your preprocessing_utils_pipeline.py for your general steps (Scaling, Imputing, One-Hot Encoding)
-and use a separate function or a Custom Transformer for the Titanic-specific "math" like adding SibSp+ Parch.
-
-How to handle Feature Engineering (The "Titanic-Specific" Logic)
-Since you want to keep your pipeline universal, you should perform your "math" (like SibSp + Parch) in a simple
-function inside your titanic_model.ipynb or a small specific module.
+Handled Feature Engineering (The "Titanic-Specific" Logic) by creating a separate function 
+that you can call before your universal pipeline in this module called add_titanic_features.
 
 The Workflow:
 
