@@ -12,11 +12,11 @@ This project establishes a high-performance baseline for digit classification us
 To understand how the models "see" digits, I generated heatmaps of pixel importance.
 
 ### Random Forest Importance
-![Random Forest Heatmap](images/RandomForestFeatureImportanceHeatmap)
+![Random Forest Heatmap](images/RandomForestFeatureImportanceHeatmap.png)
 *Observation: Shows a broad, slightly blurred focus on the central drawing area.*
 
 ### XGBoost Importance (Champion)
-![XGBoost Heatmap](images/XGBoostFeatureImportanceHeatmap)
+![XGBoost Heatmap](images/XGBoostFeatureImportanceHeatmap.png)
 *Observation: Much sharper focus on specific "stroke" pixels, explaining the higher accuracy.*
 
 ## 🛠️ Modular Pipeline
