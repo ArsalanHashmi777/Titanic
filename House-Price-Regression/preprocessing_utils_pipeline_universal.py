@@ -58,7 +58,7 @@ def add_titanic_features(df):
 
 def get_house_features(df):
     """
-    Specific feature engineering for the House Prices dataset.
+    Create feature engineering for the House Prices dataset.
     Handles ordinal mapping and feature combinations.
     """
     df_copy = df.copy()
